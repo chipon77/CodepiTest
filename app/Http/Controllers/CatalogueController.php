@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\livre;
+use Illuminate\Support\Facades\DB;
 class CatalogueController extends Controller
 {
   public function index()
@@ -12,7 +13,10 @@ class CatalogueController extends Controller
 	}
 	public function home()
 	{
-		return view('catalogue');
+	
+		$livres=  DB::table('livre')->get();
+	
+		return view('catalogue',['livres' => $livres]);
 	}
 
 }
