@@ -20,11 +20,10 @@
         <div class="col">{!! $livre->editeur !!}</div>
         <div class="col">{!! $livre->prix !!}</div>
         <div class="col">{!! $livre->type !!}</div>
-        <div class="col"><a href="produit/{!! $livre->id !!}">voir detail</a></div>
+        <div class="col"><a href="{{route('details',['n' => $livre->id])}}">voir detail</a></div>
       </div>
 </div>
 @endif
 @endforeach
- <div class="col"><a href="produit/add">ajout</a></div>
-      </div>
+
 @endsection

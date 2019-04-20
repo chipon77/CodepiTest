@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\livre;
+use App\categorie;
 use Illuminate\Support\Facades\DB;
+
 class ProduitController extends Controller
 {
    	public function show($n)
 	{
 		$details=  DB::table('livre')->find($n);
-		return view('produit',['details' => $details])->with('numero', $n);
+		$categories=DB::table('categorie')->get();
+				$lists=categorie::pluck('nom','id');
+		return view('produit',['details' => $details,'categories' => $categories,'lists' => $lists])->with('numero', $n);
 	}
 
 	public function addProduitPage()
@@ -20,7 +24,7 @@ class ProduitController extends Controller
 
 	public function deleteProduit($n)
 	{
-		$details=  DB::table('livre')->where('id', 1)->update(['affichage' => 0]);
+		$details=  DB::table('livre')->where('id', $n)->update(['affichage' => 0]);
 	
 		return  redirect()->route('home');
 	}
@@ -37,7 +41,28 @@ class ProduitController extends Controller
 		$livre->affichage=1;
 		$livre->save();
 
-		return 'Le nom est ' . $request->input('nom'); 
+		return redirect()->route('home'); 
+	}
+
+	public function editProduitRequest($n,Request $request)
+	{
+		$livre=  DB::table('livre')->where('id', $n);
+
+		$livre->update(['titre' => $request->input("titre")]);
+		$livre->update(['auteur' => $request->input("auteur")]);
+		$livre->update(['type' => $request->input("type")]);
+		$livre->update(['editeur' => $request->input("editeur")]);
+		$livre->update(['prix' => $request->input("prix")]);
+
+		return redirect()->route('details', ['n' => $n]); 
+	}
+
+	public function lierProduitRequest(Request $request)//lie une categorie à un produit
+	{
+		echo $request->id_categorie,$request->id_product;
+		$categorie= categorie::where('id',$request->id_categorie)->first();
+		$categorie->livre()->attach($request->id_product);
+		return redirect()->route('details', ['n' => $request->id_product]); 
 	}
 
 }

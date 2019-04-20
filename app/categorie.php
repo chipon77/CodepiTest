@@ -6,16 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use App\livre;
 use App\categorie;
 
-
-class livre extends Model
+class categorie extends Model
 {
-    protected $table = 'livre';    
 
+    protected $table = 'categorie';    
     public $timestamps = false;
 
-	public function categorie()
+	public function livre()
 	{
-		return $this->belongsToMany('App\categorie');
+		return $this->belongsToMany('App\livre');
 	} 
 
 }
