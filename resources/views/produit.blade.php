@@ -1,48 +1,93 @@
 @extends('template')
 
 @section('titre')
-    Les articles
+   Détails
 @endsection
 
 @section('contenu')
-<div>
-     <div class="row">
-        <div class="col">{!! $details->titre !!}</div>
-        <div class="col">{!! $details->auteur !!}</div>
-        <div class="col">{!! $details->editeur !!}</div>
-        <div class="col">{!! $details->prix !!}</div>
-        <div class="col">{!! $details->type !!}</div>
+
+
+<div class="container">
+   {!! Form::open(['url' => "produit/edit/$details->id"]) !!}
+  <h1>
+    <div  style="display: inline-block" class="base">{!! $details->titre !!} </div>
+    <div  style="display: inline-block">{!! Form::text('titre',$details->titre,array('style' => 'visibility:hidden', 'class'=> 'modify form-control')) !!}</div>
+  </h1> 
+
+  <div class="my-3 p-3 bg-white rounded box-shadow">   
+    <div class="media text-muted pt-3">
+      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray" style="font-size: 20px">
+         <div style="display: inline-block">Auteur : </div> 
+         <div class="base" style="display: inline-block">{!! $details->auteur !!}</div>
+         {!! Form::text('auteur',$details->auteur,array('style' => 'visibility:hidden', 'class'=> 'modify ')) !!}
       </div>
+    </div>
+  </div>
+
+  <div class="my-3 p-3 bg-white rounded box-shadow">
+    <div class="media text-muted pt-3">
+      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray" style="font-size: 20px">
+        <div style="display: inline-block">éditeur :</div>
+        <div class="base" style="display: inline-block">{!! $details->editeur !!}</div>
+          {!! Form::text('editeur',$details->editeur,array('style' => 'visibility:hidden', 'class'=> 'modify')) !!}
+      </div>
+    </div>
+  </div>
+
+  <div class="my-3 p-3 bg-white rounded box-shadow">
+    <div class="media text-muted pt-3">
+      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"style="font-size: 20px">
+         <div style="display: inline-block">prix :</div>
+         <div class="base" style="display: inline-block">{!! $details->prix !!} € </div>
+            {!! Form::text('prix',$details->prix,array('style' => 'visibility:hidden', 'class'=> 'modify')) !!}
+      </div>
+    </div>
+  </div>
+
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+    <div class="media text-muted pt-3">
+      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray" style="font-size: 20px">
+         <div style="display: inline-block">type : </div>
+         <div class="base" style="display: inline-block">{!! $details->type !!}</div>
+         {!! Form::text('type',$details->type,array('style' => 'visibility:hidden', 'class'=> 'modify')) !!}
+      </div>
+    </div>
+
+     <div class="my-3 p-3 bg-white rounded box-shadow">
+        <div class="media text-muted pt-3">
+      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray" style="font-size: 20px">
+         <div style="display: inline-block">categories :</div>
+        <div class="base" style="display: inline-block">
+        @foreach($licrecategorie as $categorie)
+          {!! $categorie->nom !!}
+        @endforeach
+      </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  {!! Form::submit('Envoyer !',array('style' => 'visibility:hidden', 'class'=> 'modify btn btn-primary')) !!}
+{!! Form::close() !!}
 </div>
-<div class="col"><a href="delete/{!! $details->id !!}">delete</a></div>
+
+
+<div class="row">
+<div class="col-md-4"><a href="delete/{!! $details->id !!}" class="btn btn-primary">delete</a></div>
     
-<div class="col"><a href="#" id="edit">modifier le produit</a></div>
+<div class="col-md-4"><a href="#" id="edit" class="btn btn-primary">modifier le produit</a></div>
      
-<div class="col"><a href="#" data-toggle="modal" data-target="#liecategorie">lier à une catégorie</a></div>
+<div class="col-md-4"><a href="#" data-toggle="modal" data-target="#liecategorie" class="btn btn-primary">lier à une catégorie</a></div>
+</div>
 
 
-        <div id="formEdit" style="visibility: hidden">
-        	    {!! Form::open(['url' => "produit/edit/$details->id"]) !!}
 
-          {!! Form::label('titre', 'Entrez le titre : ') !!}
-          {!! Form::text('titre',$details->titre) !!}
+        	   
 
-          {!! Form::label('type', 'Entrez le type: ') !!}
-          {!! Form::text('type',$details->type) !!}
+     
 
-          {!! Form::label('auteur', 'Entrez auteur  : ') !!}
-          {!! Form::text('auteur',$details->auteur) !!}
+          
 
-          {!! Form::label('editeur', 'Entrez editeur : ') !!}
-          {!! Form::text('editeur',$details->editeur) !!}
 
-          {!! Form::label('prix', 'Entrez le prix : ') !!}
-          {!! Form::text('prix',$details->prix) !!}
-
-          {!! Form::submit('Envoyer !') !!}
-      {!! Form::close() !!}
-
-        </div>
 
   <div class="modal fade" id="liecategorie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -55,7 +100,7 @@
       </div>
      
     {!! Form::open(['url' => 'produit/lier']) !!}
-       {!!Form::select('id_categorie', $lists,null) !!}
+       {!!Form::select('id_categorie', $lists,null,array('class'=>'form-control')) !!}
  
     {!! Form::text('id_product',$details->id,array('style' => 'visibility: hidden')) !!}
       <div class="modal-footer">
@@ -70,7 +115,9 @@
 
       <script type="text/javascript">
       	  $("#edit").click(function(){
-    		$("#formEdit").css("visibility","visible");
+  
+    		$(".modify").css("visibility","visible");
+        $(".base").hide();
   });
 
       </script>

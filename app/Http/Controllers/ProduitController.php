@@ -11,15 +11,18 @@ class ProduitController extends Controller
 {
    	public function show($n)
 	{
-		$details=  DB::table('livre')->find($n);
-		$categories=DB::table('categorie')->get();
-				$lists=categorie::pluck('nom','id');
-		return view('produit',['details' => $details,'categories' => $categories,'lists' => $lists])->with('numero', $n);
+		$details=  livre::find($n);
+
+		$licrecategorie=$details->categorie()->get();
+		$categories=DB::table('categorie')->get();//liste de toute les categories en collection
+		$lists=categorie::pluck('nom','id');////liste de toute les categories en list
+		return view('produit',['details' => $details,'categories' => $categories,'lists' => $lists,'licrecategorie' => $licrecategorie])->with('numero', $n);
 	}
 
 	public function addProduitPage()
 	{
-		return view('addProduit');
+		$lists=categorie::pluck('nom','id');
+		return view('addProduit',['lists' => $lists]);
 	}
 
 	public function deleteProduit($n)
@@ -41,6 +44,9 @@ class ProduitController extends Controller
 		$livre->affichage=1;
 		$livre->save();
 
+
+		$livre->categorie()->attach($request->categorie);
+
 		return redirect()->route('home'); 
 	}
 
@@ -59,7 +65,6 @@ class ProduitController extends Controller
 
 	public function lierProduitRequest(Request $request)//lie une categorie à un produit
 	{
-		echo $request->id_categorie,$request->id_product;
 		$categorie= categorie::where('id',$request->id_categorie)->first();
 		$categorie->livre()->attach($request->id_product);
 		return redirect()->route('details', ['n' => $request->id_product]); 

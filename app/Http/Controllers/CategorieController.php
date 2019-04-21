@@ -17,4 +17,15 @@ class CategorieController extends Controller
 
 		return redirect()->route('home'); 
 	}
+
+
+		public function editCategorieRequest(Request $request)
+	{
+
+		$categorie=  DB::table('categorie')->where('id', $request->input("id_categorie"));
+
+		$categorie->update(['nom' => $request->input("categorie_nom")]);
+
+		return  redirect()->route('home'); 
+	}
 }

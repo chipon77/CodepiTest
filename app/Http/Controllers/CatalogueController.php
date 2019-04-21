@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\livre;
+use App\categorie;
 use Illuminate\Support\Facades\DB;
 class CatalogueController extends Controller
 {
@@ -15,8 +16,8 @@ class CatalogueController extends Controller
 	{
 	
 		$livres=  DB::table('livre')->get();
-	
-		return view('catalogue',['livres' => $livres]);
+		$lists=categorie::pluck('nom','id');
+		return view('catalogue',['livres' => $livres, 'lists' => $lists]);
 	}
 
 }

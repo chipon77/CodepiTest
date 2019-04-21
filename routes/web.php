@@ -12,17 +12,19 @@
 */
 
 
-Route::get('catalogue/', 'CatalogueController@home')->name('home');
+Route::get('catalogue/', 'CatalogueController@home')->name('home'); //page d'accueil
 
-Route::get('produit/{n}', 'ProduitController@show')->where("n", '[0-9]+')->name('details');
+Route::get('produit/{n}', 'ProduitController@show')->where("n", '[0-9]+')->name('details');//page détails produit
 
-Route::get('produit/add', 'ProduitController@addProduitPage');
+Route::get('produit/add', 'ProduitController@addProduitPage');// page ajout produit
 
-Route::get('produit/delete/{n}', 'ProduitController@deleteProduit');
+Route::get('produit/delete/{n}', 'ProduitController@deleteProduit');//suprime produit
 
-Route::post('produit/add', 'ProduitController@addProduitRequest')->name('add');
+Route::post('produit/add', 'ProduitController@addProduitRequest')->name('add');// envoie données produit ajouté
 
 Route::post('categorie/add', 'CategorieController@addCategorieRequest')->name('addC');
+
+Route::post('categorie/edit', 'CategorieController@editCategorieRequest');
 
 Route::post('produit/edit/{n}', 'ProduitController@editProduitRequest');
 
