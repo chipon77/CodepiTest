@@ -40,56 +40,53 @@
 	@yield('contenu')
 
   <div class="modal fade" id="ajoutcategorie" tabindex="-1" role="dialog" >
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" >Ajout catégorie</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-    {!! Form::open(['url' => 'categorie/add']) !!}
-        {!! Form::label('nom', 'Entrez le nom de la catégorie : ') !!}
-        {!! Form::text('nom','',array('class' => 'form-control')) !!}
-       
-   
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         {!! Form::submit('Envoyer !' , array('class' => 'btn btn-primary')) !!}
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >Ajout catégorie</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        {!! Form::open(['url' => 'categorie/add']) !!}
+            {!! Form::label('nom', 'Entrez le nom de la catégorie : ') !!}
+            {!! Form::text('nom','',array('class' => 'form-control')) !!}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           {!! Form::submit('Envoyer !' , array('class' => 'btn btn-primary')) !!}
+        </div>
       </div>
     </div>
-  </div>
    {!! Form::close() !!}
 </div>
 
   <div class="modal fade" id="modifiercategorie" tabindex="-1" role="dialog" >
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" >modifier catégorie</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-    {!! Form::open(['url' => 'categorie/edit']) !!}  
-    {!!Form::select('id_categorie', $lists,null,array('class'=>'form-control','id' => 'editcategorie')) !!}
-    {!! Form::text('categorie_nom','',array('class' => 'form-control','id' => 'newname')) !!}
-       
-   
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-         {!! Form::submit('Envoyer !' , array('class' => 'btn btn-primary')) !!}
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >modifier catégorie</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+      {!! Form::open(['url' => 'categorie/edit']) !!}  
+       {!! Form::label('nom', 'Selectionner  une catégorie puis changer le nom : ') !!}
+      {!!Form::select('id_categorie', $lists,null,array('class'=>'form-control','id' => 'editcategorie')) !!}
+      {!! Form::text('categorie_nom','',array('class' => 'form-control','id' => 'newname','style'=> 'margin-top :10px')) !!}              
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           {!! Form::submit('Envoyer !' , array('class' => 'btn btn-primary')) !!}
+        </div>
       </div>
     </div>
-  </div>
    {!! Form::close() !!}
-</div>
+  </div>
 
-      <script type="text/javascript">
+      <script type="text/javascript">//javascript pour pré-remplir l'input avec le nom de la catégorie à modifier
           $("#editcategorie").change(function(){
                 $("#newname").val($("#editcategorie option:selected").text());
           });

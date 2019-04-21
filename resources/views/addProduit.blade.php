@@ -18,7 +18,7 @@
         {!! Form::text('prix','',array('class' => 'form-control')) !!}
         {!! Form::label('prix', 'choisissez une catégorie : ') !!}
         {!!Form::select('categorie', $lists,null,array('class'=>'form-control')) !!}
-        {!! Form::submit('Envoyer !',array('class' => 'btn btn-primary')) !!}
+        {!! Form::submit('Envoyer !',array('class' => 'btn btn-primary', 'style' => 'margin-top:10px')) !!}
 
     {!! Form::close() !!}
 @endsection

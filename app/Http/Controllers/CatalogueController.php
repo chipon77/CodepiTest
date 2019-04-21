@@ -5,17 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\livre;
 use App\categorie;
-use Illuminate\Support\Facades\DB;
+
 class CatalogueController extends Controller
 {
-  public function index()
-	{
-		return view('welcome');
-	}
-	public function home()
+	public function home()//page d'accueil renvoie les livres pour les afficher et les categories pour les modifier
 	{
 	
-		$livres=  DB::table('livre')->get();
+		$livres=livre::where('affichage','=',1)->paginate(9);
 		$lists=categorie::pluck('nom','id');
 		return view('catalogue',['livres' => $livres, 'lists' => $lists]);
 	}

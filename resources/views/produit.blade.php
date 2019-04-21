@@ -27,7 +27,7 @@
   <div class="my-3 p-3 bg-white rounded box-shadow">
     <div class="media text-muted pt-3">
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray" style="font-size: 20px">
-        <div style="display: inline-block">éditeur :</div>
+        <div style="display: inline-block">Editeur :</div>
         <div class="base" style="display: inline-block">{!! $details->editeur !!}</div>
           {!! Form::text('editeur',$details->editeur,array('style' => 'visibility:hidden', 'class'=> 'modify')) !!}
       </div>
@@ -37,7 +37,7 @@
   <div class="my-3 p-3 bg-white rounded box-shadow">
     <div class="media text-muted pt-3">
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"style="font-size: 20px">
-         <div style="display: inline-block">prix :</div>
+         <div style="display: inline-block">Prix :</div>
          <div class="base" style="display: inline-block">{!! $details->prix !!} € </div>
             {!! Form::text('prix',$details->prix,array('style' => 'visibility:hidden', 'class'=> 'modify')) !!}
       </div>
@@ -47,7 +47,7 @@
     <div class="my-3 p-3 bg-white rounded box-shadow">
     <div class="media text-muted pt-3">
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray" style="font-size: 20px">
-         <div style="display: inline-block">type : </div>
+         <div style="display: inline-block">Type : </div>
          <div class="base" style="display: inline-block">{!! $details->type !!}</div>
          {!! Form::text('type',$details->type,array('style' => 'visibility:hidden', 'class'=> 'modify')) !!}
       </div>
@@ -56,9 +56,9 @@
      <div class="my-3 p-3 bg-white rounded box-shadow">
         <div class="media text-muted pt-3">
       <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray" style="font-size: 20px">
-         <div style="display: inline-block">categories :</div>
+         <div style="display: inline-block">Catégories :</div>
         <div class="base" style="display: inline-block">
-        @foreach($licrecategorie as $categorie)
+        @foreach($listcategorie as $categorie)
           {!! $categorie->nom !!}
         @endforeach
       </div>
@@ -72,11 +72,11 @@
 
 
 <div class="row">
-<div class="col-md-4"><a href="delete/{!! $details->id !!}" class="btn btn-primary">delete</a></div>
+<div class="col-md-4"><a href="delete/{!! $details->id !!}" class="btn btn-primary">Supprimer</a></div>
     
-<div class="col-md-4"><a href="#" id="edit" class="btn btn-primary">modifier le produit</a></div>
+<div class="col-md-4"><a href="#" id="edit" class="btn btn-primary">Modifier le produit</a></div>
      
-<div class="col-md-4"><a href="#" data-toggle="modal" data-target="#liecategorie" class="btn btn-primary">lier à une catégorie</a></div>
+<div class="col-md-4"><a href="#" data-toggle="modal" data-target="#liecategorie" class="btn btn-primary">Lier à une catégorie</a></div>
 </div>
 
 
@@ -113,7 +113,7 @@
 </div>
 
 
-      <script type="text/javascript">
+      <script type="text/javascript">//javascript pour faire apparaitre les inputs pour changer les information du produits
       	  $("#edit").click(function(){
   
     		$(".modify").css("visibility","visible");

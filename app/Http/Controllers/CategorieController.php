@@ -4,27 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\categorie;
-use Illuminate\Support\Facades\DB;
 
 
 class CategorieController extends Controller
 {
-	public function addCategorieRequest(Request $request)
+	public function addCategorieRequest(Request $request)//sauvegarde dans la BDD la nouvelle catégorie et renvoie à la page d'accueil 
 	{
 		$categorie= new categorie;
-		$categorie->nom =$request->input("nom");
+		$categorie->nom =$request->nom;
 		$categorie->save();
 
 		return redirect()->route('home'); 
 	}
 
 
-		public function editCategorieRequest(Request $request)
+		public function editCategorieRequest(Request $request)//sauvegarde dans la BDD la modification de catégorie et renvoie à la  page d'accueil 
 	{
 
-		$categorie=  DB::table('categorie')->where('id', $request->input("id_categorie"));
+		$categorie=  categorie::where('id', $request->id_categorie);
 
-		$categorie->update(['nom' => $request->input("categorie_nom")]);
+		$categorie->update(['nom' => $request->categorie_nom]);
 
 		return  redirect()->route('home'); 
 	}

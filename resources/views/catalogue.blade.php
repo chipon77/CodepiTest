@@ -29,7 +29,7 @@
 @endforeach
     </div>
     
-
+{{ $livres->links() }}
 
 
 

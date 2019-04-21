@@ -12,7 +12,7 @@
 */
 
 
-Route::get('catalogue/', 'CatalogueController@home')->name('home'); //page d'accueil
+Route::get('/', 'CatalogueController@home')->name('home'); //page d'accueil
 
 Route::get('produit/{n}', 'ProduitController@show')->where("n", '[0-9]+')->name('details');//page détails produit
 
